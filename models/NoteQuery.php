@@ -2,12 +2,14 @@
 
 namespace app\models;
 
+use yii\db\ActiveQuery;
+
 /**
  * This is the ActiveQuery class for [[Note]].
  *
  * @see Note
  */
-class NoteQuery extends \yii\db\ActiveQuery
+class NoteQuery extends ActiveQuery
 {
     /*public function active()
     {
