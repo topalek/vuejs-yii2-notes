@@ -60,9 +60,9 @@ $config = [
             'rules'           => [
                 [
                     'class'      => yii\rest\UrlRule::class,
-                    'pluralize'  => false,
-                    'controller' => ['api/note']
-                ]
+                    'pluralize'  => true,
+                    'controller' => ['api/note'],
+                ],
             ],
         ],
 
