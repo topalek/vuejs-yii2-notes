@@ -51,6 +51,8 @@
             noteUpdated(note) {
                 this.notes[this.notes.indexOf(note)] = note;
             }
+        },
+        mounted() {
         }
     }
 </script>

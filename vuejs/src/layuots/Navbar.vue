@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar">
-        Welcome {{user.name}}
+        Welcome {{user.username}}
         <a @click="logout" href="">Logout</a>
     </nav>
 </template>
