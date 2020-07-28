@@ -23,7 +23,7 @@ class AppController extends Controller
     public function actionAddUser($name, $password)
     {
         $user = new User();
-        $user->name = $name;
+        $user->username = $name;
         $user->password_hash = Yii::$app->security->generatePasswordHash($password);
         $user->access_token = Yii::$app->security->generateRandomString(255);
 
