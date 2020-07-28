@@ -27,6 +27,7 @@ class NoteController extends ActiveController
         ];
         $behaviors['authenticator']['except'] = ['options'];
         $behaviors['cors'] = ['class' => Cors::class];
+
         return $behaviors;
     }
 

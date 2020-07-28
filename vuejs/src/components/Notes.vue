@@ -2,7 +2,7 @@
     <div class="tc-notes-wrapper">
         <add-new-button @addNote="addNote"/>
         <div class="tc-notes">
-            <note :key="index" :note="note" @deleteNote="deleteNote" @noteUpdated="noteUpdated"
+            <note :key="index" :note="note" @deleteNote="deleteNote" @noteUpdate="noteUpdate"
                   v-for="(note,index) in notes"/>
         </div>
     </div>
@@ -11,7 +11,7 @@
 <script>
     import AddNewButton from "./AddNewButton";
     import Note from "./Note";
-    import httpClient from "../sevices/http.service";
+    import noteService from "../sevices/note.service";
 
     export default {
         name: "Notes",
@@ -23,19 +23,19 @@
         },
         methods: {
             async addNote() {
-                const {status, data} = await httpClient.post('note', {});
+                const {status, data} = await noteService.create('note', {});
                 if (status === 201) {
                     this.notes.unshift(data);
                 }
             },
             async deleteNote(note) {
-                const {status, data} = await httpClient.delete('note/' + note.id, {});
+                const {status} = await noteService.delete(note.id);
                 if (status === 204) {
                     this.notes.splice(this.notes.indexOf(note));
                 }
             },
-            async noteUpdated(note) {
-                const {status, data} = await httpClient.put('note/' + note.id, note);
+            async noteUpdate(note) {
+                const {status} = await noteService.update(note);
                 if (status === 200) {
                     // this.notes.splice(this.notes.indexOf(note));
                 }
@@ -43,7 +43,7 @@
             }
         },
         async mounted() {
-            const {status, data} = await httpClient.get('note');
+            const {status, data} = await noteService.get();
             if (status === 200) {
                 this.notes = data;
             }

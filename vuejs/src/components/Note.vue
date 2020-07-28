@@ -26,11 +26,11 @@
         methods: {
             titleChanged($event) {
                 this.note.title = $event.target.innerHTML;
-                this.$emit('noteUpdated', this.note);
+                this.$emit('noteUpdate', this.note);
             },
             bodyChanged($event) {
                 this.note.body = $event.target.innerHTML;
-                this.$emit('noteUpdated', this.note);
+                this.$emit('noteUpdate', this.note);
             },
             deleteNote() {
                 this.$emit('deleteNote', this.note)
