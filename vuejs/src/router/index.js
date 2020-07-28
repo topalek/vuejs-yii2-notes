@@ -24,16 +24,16 @@ const routes = [
     },
     {
         path: '/auth',
-        name: 'Auth',
+        name: 'auth',
         component: AuthLayout,
         children: [
             {
                 path: 'login',
-                name: 'Login',
+                name: 'login',
                 component: Login,
             }, {
                 path: 'register',
-                name: 'Register',
+                name: 'register',
                 component: Register
             },
         ]
@@ -64,7 +64,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    console.log(to, from);
     if (to.name === 'home' && !authService.isLoggedIn()) {
         next('login');
     } else if (authService.isLoggedIn() && to.name !== 'home') {

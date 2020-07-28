@@ -4,9 +4,11 @@ namespace app\modules\api\controllers;
 
 use app\modules\api\models\LoginForm;
 use app\modules\api\models\SignupForm;
+use app\modules\api\resources\UserResource;
 use Yii;
 use yii\filters\Cors;
 use yii\rest\Controller;
+use yii\web\UnauthorizedHttpException;
 
 class UserController extends Controller
 {
@@ -41,7 +43,21 @@ class UserController extends Controller
 
         Yii::$app->response->statusCode = 422;
         return [
-            'errors' => $model->errors
+            'errors' => $model->errors,
         ];
+    }
+
+    public function actionGetData()
+    {
+        $headers = Yii::$app->request->headers;
+        if (!isset($headers['Authorization'])) {
+            throw new  UnauthorizedHttpException();
+        }
+        $accessToken = explode(' ', $headers['Authorization'])[1];
+        $user = UserResource::findIdentityByAccessToken($accessToken);
+        if (!$user) {
+            throw new UnauthorizedHttpException();
+        }
+        return $user;
     }
 }

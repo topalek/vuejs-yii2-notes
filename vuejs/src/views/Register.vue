@@ -17,6 +17,8 @@
 </template>
 
 <script>
+    import authService from "../sevices/auth.service";
+
     export default {
         name: "Register",
         data() {
@@ -27,6 +29,16 @@
                     password_repeat: '',
                 },
                 errors: null
+            }
+        }, methods: {
+            async register() {
+                const {success, errors} = await authService.register(this.form);
+                if (success) {
+                    this.$router.push({name: 'home'})
+                } else {
+                    this.errors = errors;
+                    console.log(errors);
+                }
             }
         }
     }
